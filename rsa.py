@@ -13,8 +13,18 @@ def is_prime(n: int) -> bool:
     >>> is_prime(8)
     False
     """
-    # PUT YOUR CODE HERE
-    pass
+    if n < 2:
+        return False
+    if n == 2 or n == 3:
+        return True
+    if n % 2 == 0:
+        return False
+    i = 3
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 2
+    return True
 
 
 def gcd(a: int, b: int) -> int:
@@ -26,8 +36,9 @@ def gcd(a: int, b: int) -> int:
     >>> gcd(3, 7)
     1
     """
-    # PUT YOUR CODE HERE
-    pass
+    while b != 0:
+        a, b = b, a % b
+    return a
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
@@ -38,8 +49,20 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
-    # PUT YOUR CODE HERE
-    pass
+   d, x1, x2 = 0, 0, 1
+    y1, y2 = 1, 0
+    original_phi = phi
+    while e>0:
+      q = phi//e
+      r=phi%e
+      phi,e=e,r
+      x=x1-q*x2
+      y=y1-q*y2
+      x1,x2=x2,x
+      y1,y2=y2,y
+    if x1<0:
+      x1+=original_phi
+    return x1
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
@@ -49,7 +72,9 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
         raise ValueError("p and q cannot be equal")
 
     # n = pq
-    # PUT YOUR CODE HERE
+    n=p*q
+    phi=(p-1)(q-1)
+    
 
     # phi = (p-1)(q-1)
     # PUT YOUR CODE HERE
